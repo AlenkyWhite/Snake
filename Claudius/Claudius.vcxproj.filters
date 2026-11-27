@@ -92,7 +92,7 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="KeyCode.h">
+    <ClInclude Include="Input.hpp">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Apple.h">

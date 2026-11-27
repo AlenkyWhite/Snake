@@ -8,8 +8,8 @@ private:
 	SDL_Renderer* renderer;
 
 public:
-	explicit Renderer(Window* window) {
-		renderer = SDL_CreateRenderer(window->getWindow(), -1, SDL_RendererFlags::SDL_RENDERER_ACCELERATED);
+	explicit Renderer(const Window& window) {
+		renderer = SDL_CreateRenderer(window.getWindow(), -1, SDL_RendererFlags::SDL_RENDERER_ACCELERATED);
 		if (renderer == nullptr)
 		{
 			throw std::exception("Error in renderer");

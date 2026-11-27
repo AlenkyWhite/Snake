@@ -81,30 +81,30 @@ void Player::Update(double dt)
 	}
 }
 
-void Player::OnKeyDown(KeyCode key)
+void Player::OnKeyDown(Input key)
 {
-	if (key == KeyCode::LEFT_ARROW)
+	if (key == Input::Left)
 	{
 		moving_left = true;
 		moving_right = false;
 		moving_up = false;
 		moving_down = false;
 	}
-	else if (key == KeyCode::RIGHT_ARROW)
+	else if (key == Input::Right)
 	{
 		moving_left = false;
 		moving_right = true;
 		moving_up = false;
 		moving_down = false;
 	}
-	else if (key == KeyCode::UP_ARROW)
+	else if (key == Input::Up)
 	{
 		moving_left = false;
 		moving_right = false;
 		moving_up = true;
 		moving_down = false;
 	}
-	else if (key == KeyCode::DOWN_ARROW)
+	else if (key == Input::Down)
 	{
 		moving_left = false;
 		moving_right = false;

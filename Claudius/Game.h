@@ -2,9 +2,10 @@
 
 #include <string>
 #include <vector>
-#include "KeyCode.h"
+#include "Input.hpp"
 #include "Apple.h"
 #include "Player.h"
+
 
 class Game
 {
@@ -24,6 +25,6 @@ public:
 	~Game();
 	void Update(double dt);
 	void Render(RenderManager& rendererManager);
-	void OnKeyDown(KeyCode key);
-	void OnKeyUp(KeyCode key);
+	void OnKeyDown(Input key);
+
 };

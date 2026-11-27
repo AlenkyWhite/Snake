@@ -107,7 +107,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="KeyCode.h" />
+    <ClInclude Include="Input.hpp" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Renderer.hpp" />
