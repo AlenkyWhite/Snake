@@ -1,18 +1,21 @@
 #pragma once
 
+#include "SDL.h"
+#include <exception>
 #include <string>
 
-struct Image;
-struct Sound;
-struct ResourceImpl;
-
-struct ResourceManager
+class ResourceManager
 {
-	ResourceManager(ResourceImpl& impl) : impl(impl) {};
-	~ResourceManager() {};
+public:
+	ResourceManager();
+	~ResourceManager();
+
+	void SetWindowParams(int width, int height, std::string title);
 	
-	bool LoadImageFromFile(Image& image, const std::string &filePath);
-	bool LoadSoundFromFile(Sound& sound, const std::string &filePath); // TODO
+	//temporary
+	SDL_Renderer* getRenderer();
+
 private:
-	ResourceImpl& impl;
+	SDL_Window* window;
+	SDL_Renderer* renderer;
 };
