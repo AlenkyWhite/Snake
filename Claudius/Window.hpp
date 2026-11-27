@@ -11,7 +11,7 @@ public:
 		window = SDL_CreateWindow("Base", 0, 0, 0, 0, SDL_WindowFlags::SDL_WINDOW_RESIZABLE);
 		if (window == nullptr)
 		{
-			throw std::exception("Error in window");
+			throw std::exception(SDL_GetError());
 		}
 	}
 	~Window()
