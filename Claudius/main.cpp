@@ -1,10 +1,12 @@
 ﻿#include "SDL.h"
 #include "RenderManager.h"
-#include "ResourceManager.h"
 #include "Game.h"
 #include "Sprite.h"
 #include "Transform.h"
 #include "Image.h"
+#include "SDLInit.hpp"
+#include "Window.hpp"
+#include "Renderer.hpp"
 
 #undef main
 
@@ -87,20 +89,20 @@ KeyCode TranslateKeyCode(SDL_Keycode code)
 
 int main()
 {
-	
+	//To remove
 	bool running = true;
 	RenderManager renderManager;
-	ResourceManager resourceManager;
 
-	ResourceImpl resourceImpl(resourceManager.getRenderer());
+
+	SDLInit init;
+	Window window;
+	Renderer renderer(&window);
+	ResourceImpl resourceImpl(renderer.getRenderer());
+
+	window.SetWindowParams(Game::windowWidth, Game::windowHeight, Game::title);
+
 
 	Game game;
-
-	int width = 500;
-	int height = 500;
-	std::string title = "";
-	game.Enter(width, height, title);
-	resourceManager.SetWindowParams(width, height, title);
 	
 	float dt = 1.0f / 60.0f;
 	while (running)
@@ -118,9 +120,9 @@ int main()
 
 		game.Update(dt);
 		game.Render(renderManager);
-
-		SDL_SetRenderDrawColor(resourceManager.getRenderer(),0,0,0,0);
-		SDL_RenderClear(resourceManager.getRenderer());
+		
+		SDL_SetRenderDrawColor(renderer.getRenderer(),0,0,0,0);
+		SDL_RenderClear(renderer.getRenderer());
 		for (auto &&entry : renderManager.spriteEntries)
 		{
 			if (entry.sprite.image != nullptr)
@@ -130,29 +132,29 @@ int main()
 							  static_cast<int>(entry.trans.position.y),
 							  static_cast<int>(entry.sprite.image->width),
 							  static_cast<int>(entry.sprite.image->height) };
-				SDL_RenderCopy(resourceManager.getRenderer(), resourceImpl.GetTexture(entry.sprite.image->id), &src, &dst);
+				SDL_RenderCopy(renderer.getRenderer(), resourceImpl.GetTexture(entry.sprite.image->id), &src, &dst);
 			}
 			else
 			{
-				SDL_SetRenderDrawColor(resourceManager.getRenderer(), entry.sprite.color.r, entry.sprite.color.g, entry.sprite.color.b, entry.sprite.color.a);
+				SDL_SetRenderDrawColor(renderer.getRenderer(), entry.sprite.color.r, entry.sprite.color.g, entry.sprite.color.b, entry.sprite.color.a);
 				SDL_Rect rect{ static_cast<int>(entry.trans.position.x),
 							   static_cast<int>(entry.trans.position.y),
 							   entry.sprite.source.w,
 							   entry.sprite.source.h };
-				SDL_RenderDrawRect(resourceManager.getRenderer(), &rect);
+				SDL_RenderDrawRect(renderer.getRenderer(), &rect);
 			}
 		}
 		for (auto&& entry : renderManager.rectEntries)
 		{
-			SDL_SetRenderDrawColor(resourceManager.getRenderer(), entry.color.r, entry.color.g, entry.color.b, entry.color.a);
+			SDL_SetRenderDrawColor(renderer.getRenderer(), entry.color.r, entry.color.g, entry.color.b, entry.color.a);
 			SDL_Rect rect{ static_cast<int>(entry.trans.position.x),
 						   static_cast<int>(entry.trans.position.y),
 						   entry.rect.w,
 						   entry.rect.h };
 			//SDL_RenderDrawRect(renderer, &rect);	// <- If you want to draw the "outline" of the rectangle.
-			SDL_RenderFillRect(resourceManager.getRenderer(), &rect);  // <- If you want to draw a "filled" rectangle. 
+			SDL_RenderFillRect(renderer.getRenderer(), &rect);  // <- If you want to draw a "filled" rectangle. 
 		}
-		SDL_RenderPresent(resourceManager.getRenderer());
+		SDL_RenderPresent(renderer.getRenderer());
 		renderManager.Clear();
 		SDL_Delay(1000 / 20); //<- "Framerate".
 	}

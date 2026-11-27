@@ -97,7 +97,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rectangle.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector2.cpp" />
@@ -111,11 +110,13 @@
     <ClInclude Include="KeyCode.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="RenderManager.h" />
-    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SDLInit.hpp" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

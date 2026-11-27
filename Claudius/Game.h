@@ -6,9 +6,6 @@
 #include "Apple.h"
 #include "Player.h"
 
-struct RenderManager;
-struct ResourceManager;
-
 class Game
 {
 	Player playerOne;
@@ -19,13 +16,12 @@ public:
 
 	// float timer; <- can be used in delta time
 	// float updateInterval; <- check Game.h
-
-	int width;
-	int height;
+	static const int windowWidth = 1250;
+	static const int windowHeight = 700;
+	inline static const std::string title = "Snake";
 
 	Game();
 	~Game();
-	bool Enter(int& width, int& height, std::string& title);
 	void Update(double dt);
 	void Render(RenderManager& rendererManager);
 	void OnKeyDown(KeyCode key);
